@@ -1,0 +1,13 @@
+[Unit]
+Description=<name of the service>
+
+[Service]
+ExecStart=<Location of the bin program> <command>
+Restart=on-failure
+WorkingDirectory=<Location of the code>
+User=<user>
+
+[Install]
+WantedBy=multi-user.target
+
+
