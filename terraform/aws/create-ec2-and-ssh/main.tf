@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
 }
 
 resource "aws_security_group" "sg-by-tf" {
-  name        = "sg-by-terraform"
+  name        = "terraform-sg"
   description = "Allow SSH access"
 
   ingress {
