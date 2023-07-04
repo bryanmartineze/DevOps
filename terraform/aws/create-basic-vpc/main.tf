@@ -88,6 +88,12 @@ resource "aws_subnet" "private_subnet_c" {
 
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.example.id
+
+    route {
+    gateway_id = aws_internet_gateway.internet_gateway.id
+    cidr_block = "0.0.0.0/0"
+  }
+
 }
 
 resource "aws_route_table_association" "public_route_table_association_a" {
