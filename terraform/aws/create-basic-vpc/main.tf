@@ -8,7 +8,7 @@ resource "aws_vpc" "example" {
     Name = "example-vpc"
   }
 }
-}
+
 
 resource "aws_internet_gateway" "example" {
   vpc_id = aws_vpc.example.id
@@ -16,7 +16,7 @@ resource "aws_internet_gateway" "example" {
     Name = "igw"
   }
 }
-}
+
 
 resource "aws_subnet" "public_subnet_a" {
   vpc_id            = aws_vpc.example.id
@@ -37,7 +37,7 @@ resource "aws_subnet" "public_subnet_b" {
     Name = "public_subnet_b"
   }
 }
-}
+
 
 resource "aws_subnet" "public_subnet_c" {
   vpc_id            = aws_vpc.example.id
@@ -48,7 +48,7 @@ resource "aws_subnet" "public_subnet_c" {
     Name = "public_subnet_c"
   }
 }
-}
+
 
 resource "aws_subnet" "private_subnet_a" {
   vpc_id            = aws_vpc.example.id
@@ -58,7 +58,7 @@ resource "aws_subnet" "private_subnet_a" {
     Name = "private_subnet_a"
   }
 }
-}
+
 
 resource "aws_subnet" "private_subnet_b" {
   vpc_id            = aws_vpc.example.id
