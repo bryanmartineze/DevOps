@@ -1,0 +1,4 @@
+FROM nginx:latest
+COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /usr/sbin
+CMD ["nginx", "-g", "daemon off;"]
