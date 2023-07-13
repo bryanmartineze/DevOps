@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #Install prerequisites
-sudo yum install epel-release -y
-sudo yum install java-11-openjdk -y
+sudo dnf install -y java-17-amazon-corretto-devel 
 
 #Install jenkins
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
