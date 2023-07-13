@@ -12,3 +12,5 @@ sudo yum install jenkins -y
 #Access jenkins in the port 8080
 sudo sed -i s/"JENKINS_PORT=8080"/"JENKINS_PORT=8090"/g /lib/systemd/system/jenkins.service
 
+#Initialize jenkins
+sudo systemctl enable --now jenkins
