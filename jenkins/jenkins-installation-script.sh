@@ -19,3 +19,9 @@ wget http://localhost:8090/jnlpJars/jenkins-cli.jar
 
 #initialize jenkins cli
 # sudo java -jar jenkins-cli.jar -s http://localhost:8090/ -auth <user>:<token>
+
+#check the ssh service endpoint
+curl -Lv http://localhost:8090/login 2>&1 | grep -i 'x-ssh-endpoint'
+
+#connect to the service endpoint
+#ssh -i /home/mike/.ssh/jenkins_key -l mike -p 8022 jenkins-server help
