@@ -1,0 +1,74 @@
+- name: 'Execute a command to display hosts file on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: "Execute a task to list the hosts file"
+    - command: 'cat /etc/hosts'
+
+- name: 'Execute two commands on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date    
+    - name: Task to display nameservers
+      command: cat /etc/resolv.conf
+
+-
+
+- name: 'Execute two commands on node01'
+  hosts: node01
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+    - name: 'Task to display hosts file on node01'
+      command: 'cat /etc/hosts'
+
+-
+
+- name: 'Execute a command on node02'
+  hosts: node02
+  become: yes
+  tasks:
+    - name: Task to display hosts file on node02
+      command: cat /etc/hosts
+
+
+- name: hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Execute a script
+      script: /tmp/install_script.sh
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+    - name: Create user
+      user:
+        name: web_user
+        uid: 1040
+        group: developers
+
+
+- name: 'hosts'
+  hosts: all
+  become: yes
+  tasks:
+    - name: 'Execute a script'
+      script: '/tmp/install_script.sh'
+    - name: 'Start httpd service'
+      service:
+        name: 'httpd'
+        state: 'started'
+    - name: "Update /var/www/html/index.html"
+      lineinfile:
+        path: /var/www/html/index.html
+        line: "Welcome to ansible-beginning course"
+        create: true
+    - name: Create user
+      user:
+        name: web_user
+        uid: 1040
+        group: developers
