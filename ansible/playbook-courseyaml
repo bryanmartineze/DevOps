@@ -69,6 +69,69 @@
         create: true
     - name: Create user
       user:
+      
         name: web_user
         uid: 1040
         group: developers
+
+---
+- name: 'Execute a script on all web server nodes #VARIABLES'
+  hosts: all
+  become: yes
+  tasks:
+   - service: 'name=nginx state=started'
+     when: ansible_host == "node02"
+
+---
+
+- name: 'Am I an Adult or a Child? #CONDITIONAL WHEN'
+  hosts: localhost
+  vars:
+    age: 25
+  tasks:
+    - name: I am a Child
+      command: 'echo "I am a Child"'
+      when: 'age < 18'
+    - name: I am an Adult
+      command: 'echo "I am an Adult"'
+      when: 'age >= 18'
+
+---
+- name: 'Add name server entry if not already entered #CONDITIONAL'
+  hosts: localhost
+  become: yes
+  tasks:
+    - shell: 'cat /etc/resolv.conf'
+      register: command_output
+    - shell: 'echo "nameserver 10.0.250.10" >> /etc/resolv.conf'
+      when: 'command_output.stdout.find("10.0.250.10") == -1'
+
+---
+
+- name: 'Print list of fruits #LOOPS WITH ITEM'
+  hosts: localhost
+  vars:
+    fruits:
+      - Apple
+      - Banana
+      - Grapes
+      - Orange
+  tasks:
+    - command: 'echo "{{ item }}"'
+      with_items: '{{ fruits }}'
+
+---
+
+- name: 'Install required packages #LOOPS WITH ITEM'
+  hosts: localhost
+  become: yes
+  vars:
+    packages:
+      - httpd
+      - make
+      - vim
+  tasks:
+    - yum:
+        name: '{{ item }}'
+        state: present
+      with_items: '{{ packages }}'
