@@ -1,0 +1,38 @@
+- name: Copy a file using module copy in both hosts
+  hosts: web_nodes
+  become: yes
+  tasks:
+    - name: Copy /usr/src/blog/index.html to both hosts
+      copy:
+        src: /usr/src/blog/index.html
+        dest: /opt/blog
+        remote_src: yes
+
+---
+
+- name: Copy a file using module copy in both hosts, adds a conditional
+  hosts: web_nodes
+  become: yes
+  tasks:
+    - name: Copy /usr/src/condition/blog.txt to node01
+      copy:
+        src: /usr/src/condition/blog.txt
+        dest: /opt/condition
+        owner: bob
+        group: bob
+        mode: 0640
+      when: inventory_hostname == node01
+
+
+- name: Copy a file using module copy in both hosts, adds a conditional
+  hosts: web_nodes
+  become: yes
+  tasks:
+    - name: Copy /usr/src/condition/blog.txt to node01
+      copy:
+        src: /usr/src/condition/story.txt
+        dest: /opt/condition/story.txt
+        owner: sam
+        group: sam
+        mode: 0400
+      when: inventory_hostname == "node02"

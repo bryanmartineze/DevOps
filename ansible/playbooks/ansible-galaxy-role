@@ -1,0 +1,44 @@
+ansible-galaxy install geerlingguy.nodejs -p /home/bob/playbooks/roles
+
+
+#Run below commands:
+
+
+#cd /home/bob/playbooks/roles/
+#ansible-galaxy init package
+##vi /home/bob/playbooks/roles/package/tasks/main.yml
+
+
+
+#Add below code in this task:
+
+
+---
+# tasks file for nginx
+- name: Install Nginx
+  ansible.builtin.package:
+    name: nginx 
+    state: latest
+- name: Start Nginx Service
+  ansible.builtin.service:
+    name: nginx 
+    state: started
+
+
+
+#Now modify the /home/bob/playbooks/role.yml playbook so that it looks like as below:
+
+
+---
+- hosts: node01
+  become: true
+  roles:
+    - roles/package
+
+
+
+#Run the playbook with below command:
+
+
+#cd /home/bob/playbooks/
+#ansible-playbook -i inventory role.yml

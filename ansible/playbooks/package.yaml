@@ -1,0 +1,23 @@
+- name: "Install vim-enhanced locally using the yum module"
+  hosts: localhost
+  connection: local
+  become: true
+  tasks: 
+    - name: Install vim-enhanced
+      yum:
+        name: vim-enhanced
+        state: present
+      
+---
+
+- name: Install an start a package service on both nodes
+  hosts: all
+  become: true
+  tasks:
+  - name: Install httpd package
+    yum: name=vsftpd state=installed
+
+  - name: Start service
+    service:
+      name: vsftpd
+      state: started

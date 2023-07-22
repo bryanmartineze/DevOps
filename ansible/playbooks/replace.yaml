@@ -1,0 +1,19 @@
+- name: Replace a string in the contents of a file using replace module
+  hosts: node01
+  become: true
+  tasks:
+    - name: Replace Kodekloud with Ansible in file /opt/music/blog.txt and /opt/music/story.txt
+      replace: 
+        path: /opt/music/blog.txt
+        regexp: "Kodekloud"
+        replace: "Ansible"
+
+- name: Replace a string in the contents of a file using replace module
+  hosts: node02
+  become: true
+  tasks:
+    - name: Replace Ansible with Kodekloud in file /opt/music/blog.txt and /opt/music/story.txt
+      replace:
+        path: /opt/music/story.txt
+        regexp: "Ansible"
+        replace: "Kodekloud"

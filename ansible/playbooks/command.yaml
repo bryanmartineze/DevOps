@@ -1,0 +1,10 @@
+---
+- name: "Create a command to list the hosts in /etc/resolv.conf"
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Execute a command
+      command: cat /etc/resolv.conf
+
+#To execute a playbook without inventory use: 'ansible-playbook -i localhost, command.yml -vv'

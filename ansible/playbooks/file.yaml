@@ -1,0 +1,33 @@
+---
+- name: Create a file using module file in node01
+  hosts: node01
+  become: yes
+  tasks:
+    - name: create blog.tx
+      file:
+        path: /opt/news/blog.txt
+        state: touch
+        group: sam
+
+
+- name: Create a file using module file in node02
+  hosts: node02
+  become: yes
+  tasks:
+    - name: create story.txt
+      file:
+        path: /opt/news/story.txt
+        state: touch
+        owner: sam
+
+
+- name: Create a file using module file and write contents in node01
+  hosts: node01
+  become: yes
+  tasks:
+    - name: create file.txt in /opt
+      copy:
+        dest: /opt/file.txt
+        content: "This file is created by Ansible!"
+
+
