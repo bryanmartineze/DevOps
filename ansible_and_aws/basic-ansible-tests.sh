@@ -17,12 +17,20 @@ cat > keys.yml
 
 AWS_ACCESS_KEY_ID:
 AWS_SECRET_ACCESS_KEY:
-AWS_REGION:
+AWS_REGION: us-east-1
+
+#encrypt the keys.yml with ansible-vault encryption
+
+ansible-encrypt keys.yml
 
 #Create a test.yml playbook
 
 - name: Test gather info from instance named demo
   hosts: localhost
+  gather_facts: yes
   become: true
+  vars_files:
+    - keys.yml
   tasks:
-    -
+    - name: Chenge instances state by tag
+    
