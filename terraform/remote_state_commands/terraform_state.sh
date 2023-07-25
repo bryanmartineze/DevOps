@@ -4,7 +4,7 @@ terraform state list
 
 #show the state of a resource
 
-terraform state show <module>.<resource>
+terraform state show <resource>.<name>
 
 #erase a resource from a configuration file
 
